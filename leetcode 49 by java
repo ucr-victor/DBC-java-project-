@@ -1,0 +1,31 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0)
+            return new ArrayList<>();
+
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s : strs) {
+            char[] count = new char[26]; // Create an array of character counts
+            for (char c : s.toCharArray()) {
+                count[c - 'a']++; // The corresponding character count is incremented
+            }
+            String keyStr = new String(count);
+            if (!map.containsKey(keyStr))
+                map.put(keyStr, new ArrayList<>());
+            map.get(keyStr).add(s);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
+
+/*
+Time complexity: 
+    O(N * K), where N is the number of strings and K is the maximum length of the string. For each string, we need O(K) time to calculate character frequencies, and the overall process takes O(N * K).
+
+Space complexity: 
+    O(N * K), overhead for storing HashMap, assuming that the length of the string storing character frequencies is K, and there are a total of N such strings.
+
+https://www.youtube.com/watch?v=vzdNOK2oB2E
+This video helps a lot
+The main difference between the Java implementation and the Python implementation is that Java uses a char array to store the character count and converts it to a string as the key to the hash map. This is slightly different from how using tuples as keys in Python, but essentially achieves the same purpose.
+*/
