@@ -1,0 +1,23 @@
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        Set<String> seen = new HashSet<>();//HashSet to store seen DNA sequences.
+        Set<String> res = new HashSet<>();//HashSet to store the result, which is the repeated DNA sequence.
+        for (int i = 0; i <= s.length() - 10; i++) {//Traverse s until there are not enough characters left to form a sequence of length 10.
+            String cur = s.substring(i, i + 10);
+            if (seen.contains(cur)) {
+                res.add(cur);
+            } else {
+                seen.add(cur);
+            }
+        }
+        return new ArrayList<>(res);//Traverse done, get the result
+    }
+}
+
+/* 
+Time complexity: 
+    O(n), where n is the length of string s. Each substring of length 10 takes constant time to process, including the hash table operations.
+
+Space complexity: 
+    O(n), worst case, if every substring of length 10 is different, then the seen and res collections will store （n - 9） different strings.
+*/
