@@ -9,16 +9,16 @@ class Solution {
 
     private void dfs(String str, int left, int right) { //dfs
 
-        if (left < 0 || left > right) {
+        if (left < 0 || left > right) { //invalid combination
             return;
         }
 
-        if (left == 0 && right == 0) {
+        if (left == 0 && right == 0) { //good combination
             res.add(str);
             return;
         }
 
-        dfs(str + '(', left - 1, right);
+        dfs(str + '(', left - 1, right); //no result ,recursion go on
         dfs(str + ')', left, right - 1);
 
     }
