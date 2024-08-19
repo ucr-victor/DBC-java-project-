@@ -1,0 +1,34 @@
+class Solution {
+
+    private List<String> res = new ArrayList<>(); //result
+
+    public List<String> generateParenthesis(int n) { //dfs entry
+        dfs("", n, n);
+        return res;
+    }
+
+    private void dfs(String str, int left, int right) { //dfs
+
+        if (left < 0 || left > right) {
+            return;
+        }
+
+        if (left == 0 && right == 0) {
+            res.add(str);
+            return;
+        }
+
+        dfs(str + '(', left - 1, right);
+        dfs(str + ')', left, right - 1);
+
+    }
+
+}
+
+/*
+time complexity
+    It must be lower than O(2^(2n)), but it's little hard for me to analy why it is O(4^n / sqrt(n))
+
+space complexity
+    Since the biggest depth of the recursive stack is 2n, the space complexity is O(n)
+*/
